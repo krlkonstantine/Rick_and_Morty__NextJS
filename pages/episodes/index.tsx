@@ -1,38 +1,38 @@
 import React from 'react';
 import {API} from "../../assets/api/api";
-import {ResponseType, CharacterType} from "../../assets/api/rick-and-morty-api";
+import {ResponseType, CharacterType, EpisodeType} from "../../assets/api/rick-and-morty-api";
 import {Header} from "../../components/Header/Header";
 import {PageWrapper} from "../../components/PageWrapper/PageWrapper";
 
 export const getStaticProps = async () => {
-    const characters = await API.rickAndMorty.getCharacters()
+    const episodes = await API.rickAndMorty.getEpisodes()
 
     return {
         props: {
-            characters
+            episodes
         }
     }
 }
 //получаем персонажей с апишки, возвращаем их  в объекте пропс
 //далее типизируем и отдаем объект компоненту
 type PropsType = {
-    characters: ResponseType<CharacterType>
+    episodes: ResponseType<EpisodeType>
 }
 
-const Characters = (props: PropsType) => {
-    const {characters} = props
+const Episodes = (props: PropsType) => {
+    const {episodes} = props
 
-    const charactersList = characters.results.map(character =>
-        <div key={character.id}>
-            {character.name}
+    const episodeList = episodes.results.map(episode =>
+        <div key={episode.id}>
+            {episode.name}
         </div>
     )
     return (
         <PageWrapper>
             <Header/>
-            {charactersList}
+            {episodeList}
         </PageWrapper>
     );
 };
 
-export default Characters;
+export default Episodes;
