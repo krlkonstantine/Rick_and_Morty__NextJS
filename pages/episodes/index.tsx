@@ -1,20 +1,27 @@
 import React from 'react';
 import {API} from "../../assets/api/api";
-import {ResponseType, CharacterType, EpisodeType} from "../../assets/api/rick-and-morty-api";
+import {ResponseType, EpisodeType} from "../../assets/api/rick-and-morty-api";
 import {Header} from "../../components/Header/Header";
 import {PageWrapper} from "../../components/PageWrapper/PageWrapper";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const episodes = await API.rickAndMorty.getEpisodes()
 
+    if (!episodes){
+        return {
+            notFound: true
+            //если ничего не найдется, то
+            //перекинет на 404 Page not found
+        }
+    }
     return {
         props: {
             episodes
         }
     }
 }
-//получаем персонажей с апишки, возвращаем их  в объекте пропс
-//далее типизируем и отдаем объект компоненту
+
+
 type PropsType = {
     episodes: ResponseType<EpisodeType>
 }
