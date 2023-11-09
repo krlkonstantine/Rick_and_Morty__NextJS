@@ -4,7 +4,7 @@ import {Header} from "../../components/Header/Header";
 import {PageWrapper} from "../../components/PageWrapper/PageWrapper";
 import {dehydrate, QueryClient, useQuery} from "@tanstack/react-query";
 import {ResponseType, LocationType} from "../../assets/api/rick-and-morty-api";
-import {API} from "../../assets/api/api";
+import {Card} from "../../components/Card/Card";
 
 const getLocations = () => {
     return fetch('https://rickandmortyapi.com/api/location',
@@ -30,9 +30,8 @@ const Locations = () => {
     if (!locations) return null
 
     const locationsList = locations.results.map(location =>
-        <div key={location.id}>
-            {location.name}
-        </div>
+
+        <Card key={location.id} name={location.name}/>
     )
     return (
         <PageWrapper>
