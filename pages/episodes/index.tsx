@@ -4,6 +4,8 @@ import {ResponseType, EpisodeType} from "../../assets/api/rick-and-morty-api";
 import {Header} from "../../components/Header/Header";
 import {PageWrapper} from "../../components/PageWrapper/PageWrapper";
 import {Card} from "../../components/Card/Card";
+import {getLayout} from "../../components/Layout/BaseLayout/BaseLayout";
+import Characters from "../characters";
 
 export const getServerSideProps = async () => {
     const episodes = await API.rickAndMorty.getEpisodes()
@@ -35,10 +37,10 @@ const Episodes = (props: PropsType) => {
     )
     return (
         <PageWrapper>
-            <Header/>
             {episodeList}
         </PageWrapper>
     );
 };
+Episodes.getLayout = getLayout
 
 export default Episodes;
