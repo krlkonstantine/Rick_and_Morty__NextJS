@@ -13,8 +13,6 @@ export const getServerSideProps = async () => {
     if (!episodes) {
         return {
             notFound: true
-            //если ничего не найдется, то
-            //перекинет на 404 Page not found
         }
     }
     return {
