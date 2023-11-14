@@ -5,6 +5,8 @@ import {PageWrapper} from "../../components/PageWrapper/PageWrapper";
 import {CharacterCard} from "../../components/Card/CharacterCard/CharacterCard";
 import {getLayout} from "../../components/Layout/BaseLayout/BaseLayout";
 import {GetStaticPaths, GetStaticProps} from "next";
+import {useRouter} from "next/router";
+import styled from "styled-components";
 
 export const getStaticPaths: GetStaticPaths = async () => {
     //тоже асинк фнк, вызывается на сервере и используется
@@ -20,11 +22,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = results.map(character => (
         {params: {id: String(character.id)}}
     ))
-   //должен возвращать массив объектов парамс у каждого из которых обж айди
+    //должен возвращать массив объектов парамс у каждого из которых обж айди
 
     return {
         paths,
-        fallback: false
+        fallback: true
+        //у нас апишка достает только 20 пользователей (перв стр)
+        //и по дефолту заранаее кешируются только 20 страниц
+        //но если вдруг мы запаршиваем 31-ую стр, он сгенерит и ее
     }
     //что поулчаем в итоге: мы сгенерили characters, присволи их result
     //далее мы мапим каждого перса, и для каждого создаем объект params,
@@ -62,14 +67,25 @@ type PropsType = {
 }
 
 const Character = (props: PropsType) => {
+    const router = useRouter()
+
+    if (router.isFallback) return <h1>Loading...</h1>
+
     const {character} = props
 
+    const characterId = router.query.id
 
     return (
         <PageWrapper>
+            <IdText>Id: {characterId}</IdText>
             <CharacterCard key={character.id} character={character}/>
         </PageWrapper>
     );
 };
 Character.getLayout = getLayout
 export default Character;
+
+const IdText = styled.div`
+font-size: 38px;
+  
+`
