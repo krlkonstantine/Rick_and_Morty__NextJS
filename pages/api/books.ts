@@ -14,10 +14,17 @@ export default function handler(
     res: NextApiResponse<Data>
 ) {
     if (req.method === 'GET') {
-        res.status(200).json(booksDB)
+        let books = booksDB
+
+        const term = req.query.term as string
+        //достаем квери параметрыс помощью св-ва квери
+        if (term) {
+            books = books.filter(book => book.title.toLowerCase().includes(term.toLowerCase()))
+        }
+        res.status(200).json(books)
 
     }
-    }
+}
 
 
 //Types
