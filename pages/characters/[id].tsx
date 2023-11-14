@@ -77,14 +77,14 @@ const Character = (props: PropsType) => {
 
     const goToCharacters = () => router.push('/characters')
         //метод пуш объекта роутер аналог navigate от useNavigate
-
+        //TODO можно добавить функционал достать рандомного перса
 
     return (
         <PageWrapper>
             <CharacterContainer>
                 <IdText>Id: {characterId}</IdText>
                 <CharacterCard key={character.id} character={character}/>
-                <Button onClick={goToCharacters}>Go back</Button>
+                <Button onClick={goToCharacters}>Back to characters</Button>
             </CharacterContainer>
 
         </PageWrapper>
@@ -96,14 +96,13 @@ export default Character;
 const CharacterContainer = styled.div`
   display: flex;
   flex-direction: column;
-  
+  row-gap: 20px;
   &:hover {
   }
 `
 const Button = styled.button`
 
-  margin-top: 25px;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: darkgray;
   width: 340px;
   height: 60px;
@@ -120,5 +119,4 @@ const Button = styled.button`
 
 const IdText = styled.div`
 font-size: 38px;
-  
 `
