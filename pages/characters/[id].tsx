@@ -75,15 +75,48 @@ const Character = (props: PropsType) => {
 
     const characterId = router.query.id
 
+    const goToCharacters = () => router.push('/characters')
+        //метод пуш объекта роутер аналог navigate от useNavigate
+
+
     return (
         <PageWrapper>
-            <IdText>Id: {characterId}</IdText>
-            <CharacterCard key={character.id} character={character}/>
+            <CharacterContainer>
+                <IdText>Id: {characterId}</IdText>
+                <CharacterCard key={character.id} character={character}/>
+                <Button onClick={goToCharacters}>Go back</Button>
+            </CharacterContainer>
+
         </PageWrapper>
     );
 };
 Character.getLayout = getLayout
 export default Character;
+
+const CharacterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+  }
+`
+const Button = styled.button`
+
+  margin-top: 25px;
+  border-radius: 4px;
+  background-color: darkgray;
+  width: 340px;
+  height: 60px;
+  font-size: 30px;
+  color: white;
+  border: none;
+  transition: 0.3s all;
+
+  &:hover {
+    background-color: #fa52d3;
+    border: 1px solid darkgray;
+  }
+`
 
 const IdText = styled.div`
 font-size: 38px;
