@@ -2,7 +2,6 @@ import React from 'react';
 import {API} from "assets/api/api";
 import {ResponseType, CharacterType} from "../../assets/api/rick-and-morty-api";
 import {PageWrapper} from "components/PageWrapper/PageWrapper";
-//import {CharacterCard} from "components/Card/CharacterCard/CharacterCard";
 import {getLayout} from "components/Layout/BaseLayout/BaseLayout";
 import dynamic from "next/dynamic";
 
